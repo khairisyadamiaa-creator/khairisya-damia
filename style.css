@@ -1,0 +1,1343 @@
+/* =====================================================
+   MAGICAL GARDEN FENCE
+   Created by Khairisya Damia
+   Year 5 Mathematics — DSKP 6.3.1
+===================================================== */
+
+
+/* =====================================================
+   1. GENERAL PAGE
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f4fff5 0%,
+            #e8f8e8 55%,
+            #d8f0d7 100%
+        );
+
+    color: #31523a;
+}
+
+
+/* =====================================================
+   2. GAME CONTAINER
+===================================================== */
+
+.game-container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   3. TOP BAR
+===================================================== */
+
+.top-bar {
+    width: 100%;
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 25px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    border-bottom: 2px solid #c9e7c9;
+
+    box-shadow:
+        0 3px 12px rgba(70, 120, 70, 0.12);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    color: #3d774b;
+}
+
+
+.student-name {
+    font-size: 0.9rem;
+    color: #617568;
+}
+
+
+.sound-button {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #fff4bd;
+
+    font-size: 1.2rem;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.sound-button:hover {
+    transform: scale(1.08);
+    background: #ffe995;
+}
+
+
+/* =====================================================
+   4. SCREEN SYSTEM
+===================================================== */
+
+.screen {
+    display: none;
+
+    width: 100%;
+    min-height: calc(100vh - 70px);
+
+    padding: 45px 20px;
+
+    text-align: center;
+}
+
+
+.screen.active {
+    display: block;
+
+    animation:
+        screenAppear 0.5s ease;
+}
+
+
+@keyframes screenAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   5. WELCOME SCREEN
+===================================================== */
+
+.welcome-content {
+    max-width: 900px;
+    margin: 0 auto;
+
+    padding-top: 30px;
+}
+
+
+.magic-flowers {
+    font-size: 2rem;
+
+    letter-spacing: 8px;
+
+    margin-bottom: 15px;
+
+    animation:
+        floatingFlowers 3s ease-in-out infinite;
+}
+
+
+@keyframes floatingFlowers {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+.welcome-content h1 {
+    font-size: clamp(2.3rem, 7vw, 4.5rem);
+
+    color: #3c7548;
+
+    margin-bottom: 12px;
+
+    text-shadow:
+        2px 2px 0 #ffffff;
+}
+
+
+.welcome-content h2 {
+    font-size: 1.3rem;
+
+    font-weight: normal;
+
+    color: #65836b;
+
+    margin-bottom: 30px;
+}
+
+
+.creator-card {
+    display: inline-block;
+
+    padding: 18px 35px;
+
+    margin-bottom: 25px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    border: 2px solid #cce7ca;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 20px rgba(67, 117, 67, 0.1);
+}
+
+
+.creator-card p {
+    margin: 5px;
+}
+
+
+.creator-card h3 {
+    color: #3d774b;
+
+    font-size: 1.4rem;
+
+    margin: 5px 0;
+}
+
+
+/* =====================================================
+   6. STORY BOX
+===================================================== */
+
+.story-box {
+    max-width: 700px;
+
+    margin: 0 auto 30px;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    border-radius: 25px;
+
+    border-left: 7px solid #f5c85b;
+
+    box-shadow:
+        0 8px 20px rgba(75, 115, 75, 0.12);
+
+    line-height: 1.7;
+
+    font-size: 1.05rem;
+}
+
+
+.story-box p:first-child {
+    font-size: 1.2rem;
+
+    font-weight: bold;
+
+    color: #547b58;
+
+    margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   7. MAIN BUTTON
+===================================================== */
+
+.main-button {
+    border: none;
+
+    padding: 15px 30px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7c95d,
+            #f2b947
+        );
+
+    color: #4d4427;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 #d79e2e,
+        0 8px 15px rgba(120, 100, 40, 0.18);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.main-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 0 #d79e2e,
+        0 10px 18px rgba(120, 100, 40, 0.2);
+}
+
+
+.main-button:active {
+    transform: translateY(3px);
+
+    box-shadow:
+        0 2px 0 #d79e2e;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =====================================================
+   8. SECTION TITLE
+===================================================== */
+
+.section-title {
+    max-width: 850px;
+
+    margin: 0 auto 25px;
+}
+
+
+.section-title span {
+    display: inline-block;
+
+    padding: 7px 15px;
+
+    background: #e5f5e1;
+
+    color: #4b7952;
+
+    border-radius: 20px;
+
+    font-size: 0.9rem;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+
+.section-title h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+
+    color: #3e7148;
+
+    margin-bottom: 10px;
+}
+
+
+.section-title p {
+    color: #65796a;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   9. LESSON CARD
+===================================================== */
+
+.lesson-card {
+    max-width: 950px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 10px 30px rgba(60, 100, 65, 0.12);
+}
+
+
+.garden-preview {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 300px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #dff5df,
+            #c9eac7
+        );
+
+    border-radius: 25px;
+}
+
+
+.simple-garden {
+    position: relative;
+
+    width: 260px;
+    height: 190px;
+
+    background: #9ed18f;
+
+    border: 8px solid #d9b56d;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 6px 0 #a78551;
+}
+
+
+.garden-house {
+    position: absolute;
+
+    font-size: 55px;
+
+    left: 95px;
+    top: 60px;
+}
+
+
+.garden-flower {
+    position: absolute;
+
+    font-size: 30px;
+
+    left: 25px;
+    bottom: 20px;
+}
+
+
+.garden-flower.second {
+    left: auto;
+    right: 25px;
+}
+
+
+/* =====================================================
+   10. LESSON TEXT
+===================================================== */
+
+.lesson-text {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    text-align: left;
+
+    line-height: 1.7;
+}
+
+
+.lesson-text h3 {
+    color: #4b7c52;
+
+    font-size: 1.5rem;
+
+    margin-bottom: 15px;
+}
+
+
+.lesson-text p {
+    margin-bottom: 15px;
+}
+
+
+.important-box {
+    padding: 15px;
+
+    background: #fff7cf;
+
+    border-left: 5px solid #f2c34f;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   11. INSTRUCTION BOX
+===================================================== */
+
+.instruction-box {
+    max-width: 800px;
+
+    margin: 0 auto 20px;
+
+    padding: 15px 20px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 15px rgba(70, 110, 70, 0.1);
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   12. SVG GARDEN
+===================================================== */
+
+.shape-area {
+    max-width: 800px;
+
+    margin: 0 auto;
+
+    padding: 15px;
+
+    background: #ffffff;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 10px 25px rgba(60, 100, 65, 0.12);
+}
+
+
+.garden-svg {
+    width: 100%;
+
+    max-width: 700px;
+
+    height: auto;
+
+    overflow: visible;
+}
+
+
+.garden-shape {
+    stroke: #527c50;
+
+    stroke-width: 3;
+
+    stroke-linejoin: round;
+}
+
+
+.rectangle-shape {
+    fill: #bfe6ad;
+}
+
+
+.triangle-shape {
+    fill: #d8f0bd;
+}
+
+
+/* =====================================================
+   13. CLICKABLE SIDES
+===================================================== */
+
+.clickable-side {
+    stroke-width: 14;
+
+    stroke-linecap: round;
+
+    fill: none;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s ease,
+        stroke-width 0.2s ease;
+}
+
+
+.clickable-side:hover {
+    opacity: 0.35;
+
+    stroke: #f4c84f;
+
+    stroke-width: 18;
+}
+
+
+.clickable-side.selected {
+    opacity: 1;
+
+    stroke: #e5a82f;
+
+    stroke-width: 9;
+
+    animation:
+        fenceGlow 1s ease;
+}
+
+
+.clickable-side.wrong {
+    opacity: 1;
+
+    stroke: #d98263;
+
+    stroke-width: 9;
+
+    animation:
+        gentleShake 0.4s ease;
+}
+
+
+@keyframes fenceGlow {
+
+    0% {
+        stroke-dasharray: 0 1000;
+    }
+
+    100% {
+        stroke-dasharray: 1000 0;
+    }
+
+}
+
+
+@keyframes gentleShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    75% {
+        transform: translateX(3px);
+    }
+
+}
+
+
+/* =====================================================
+   14. FEEDBACK
+===================================================== */
+
+.feedback-area {
+    min-height: 70px;
+
+    max-width: 750px;
+
+    margin: 15px auto;
+}
+
+
+#fenceInstruction {
+    color: #5d7462;
+
+    margin-bottom: 8px;
+}
+
+
+#feedbackMessage {
+    font-weight: bold;
+
+    min-height: 25px;
+}
+
+
+.feedback-correct {
+    color: #4c8a54;
+}
+
+
+.feedback-wrong {
+    color: #b96b52;
+}
+
+
+/* =====================================================
+   15. SELECTED SIDES
+===================================================== */
+
+.selected-sides {
+    max-width: 650px;
+
+    margin: 15px auto 20px;
+
+    padding: 15px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    border-radius: 20px;
+}
+
+
+.selected-sides h3 {
+    margin-bottom: 8px;
+
+    color: #55765b;
+}
+
+
+#selectedSidesList {
+    min-height: 25px;
+
+    color: #65766a;
+}
+
+
+/* =====================================================
+   16. CALCULATION CARD
+===================================================== */
+
+.calculation-card {
+    max-width: 700px;
+
+    margin: 0 auto 25px;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 10px 30px rgba(60, 100, 65, 0.12);
+}
+
+
+.calculation-visual {
+    margin-bottom: 10px;
+}
+
+
+.fence-icon {
+    font-size: 4rem;
+
+    animation:
+        floatingFlowers 2.5s ease-in-out infinite;
+}
+
+
+.calculation-card h3 {
+    color: #4e7655;
+
+    margin-bottom: 15px;
+}
+
+
+.calculation-expression {
+    padding: 18px;
+
+    margin: 15px auto;
+
+    background: #f4fae9;
+
+    border: 2px dashed #a7c994;
+
+    border-radius: 15px;
+
+    font-size: 1.3rem;
+
+    font-weight: bold;
+
+    color: #536e4e;
+}
+
+
+.answer-area {
+    margin-top: 20px;
+}
+
+
+.answer-area label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+
+.answer-input-container {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+}
+
+
+.answer-input-container input {
+    width: 180px;
+
+    padding: 13px;
+
+    border: 2px solid #b8d6b3;
+
+    border-radius: 12px;
+
+    font-size: 1.1rem;
+
+    text-align: center;
+
+    outline: none;
+}
+
+
+.answer-input-container input:focus {
+    border-color: #6ca36e;
+
+    box-shadow:
+        0 0 0 3px rgba(108, 163, 110, 0.12);
+}
+
+
+.calculation-feedback {
+    min-height: 50px;
+
+    margin-top: 15px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   17. DESIGNER
+===================================================== */
+
+.designer-area {
+    max-width: 1000px;
+
+    margin: 0 auto 20px;
+
+    display: grid;
+
+    grid-template-columns: 260px 1fr;
+
+    gap: 20px;
+}
+
+
+.shape-selection {
+    padding: 20px;
+
+    background: #ffffff;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 8px 20px rgba(60, 100, 65, 0.1);
+}
+
+
+.shape-selection h3 {
+    color: #527653;
+
+    margin-bottom: 15px;
+}
+
+
+.shape-button {
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 12px;
+
+    padding: 12px;
+
+    border: 2px solid #cce3c8;
+
+    border-radius: 15px;
+
+    background: #f7fff4;
+
+    color: #4d6f51;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.shape-button:hover {
+    background: #e9f7e3;
+
+    transform: translateY(-2px);
+}
+
+
+.my-garden {
+    min-height: 350px;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #dff3d9,
+            #c5e6bc
+        );
+
+    border-radius: 30px;
+
+    border: 5px solid #b3d5a7;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    box-shadow:
+        inset 0 0 25px rgba(70, 120, 70, 0.08);
+}
+
+
+.garden-message {
+    color: #678067;
+
+    line-height: 1.7;
+}
+
+
+.design-shape {
+    width: 120px;
+    height: 120px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3rem;
+
+    background: #bde3ad;
+
+    border: 4px solid #729d69;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.design-shape:hover {
+    transform: scale(1.05);
+}
+
+
+.design-rectangle {
+    border-radius: 8px;
+
+    width: 160px;
+}
+
+
+.design-equilateral {
+    clip-path:
+        polygon(
+            50% 0%,
+            100% 100%,
+            0% 100%
+        );
+
+    border: none;
+
+    background: #cdeabf;
+}
+
+
+.design-isosceles {
+    clip-path:
+        polygon(
+            50% 0%,
+            100% 100%,
+            0% 100%
+        );
+
+    border: none;
+
+    background: #d8edbd;
+}
+
+
+/* =====================================================
+   18. DESIGN FEEDBACK
+===================================================== */
+
+.design-feedback {
+    max-width: 700px;
+
+    min-height: 50px;
+
+    margin: 15px auto;
+
+    padding: 10px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   19. FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+    max-width: 750px;
+
+    margin: 20px auto;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 10px 30px rgba(60, 100, 65, 0.12);
+}
+
+
+.final-card h1 {
+    color: #47764f;
+
+    margin-bottom: 10px;
+}
+
+
+.quiz-question {
+    margin-top: 25px;
+}
+
+
+.quiz-question h3 {
+    margin-bottom: 20px;
+
+    color: #55745a;
+}
+
+
+.quiz-option {
+    display: block;
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin: 12px 0;
+
+    border: 2px solid #cfe4ca;
+
+    border-radius: 15px;
+
+    background: #f8fff6;
+
+    color: #4e6952;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    text-align: left;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.quiz-option:hover {
+    background: #eaf7e5;
+
+    transform: translateX(3px);
+}
+
+
+.quiz-feedback {
+    min-height: 45px;
+
+    margin-top: 15px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   20. COMPLETION
+===================================================== */
+
+.completion-card {
+    max-width: 750px;
+
+    margin: 30px auto;
+
+    padding: 40px 25px;
+
+    background: #ffffff;
+
+    border-radius: 35px;
+
+    box-shadow:
+        0 15px 35px rgba(60, 100, 65, 0.15);
+}
+
+
+.completion-card h1 {
+    color: #47784e;
+
+    margin: 15px 0;
+}
+
+
+.celebration {
+    font-size: 2.3rem;
+
+    letter-spacing: 8px;
+
+    animation:
+        celebrationFloat 2s ease-in-out infinite;
+}
+
+
+@keyframes celebrationFloat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+}
+
+
+.certificate {
+    margin: 25px auto;
+
+    padding: 25px;
+
+    max-width: 550px;
+
+    background: #fff9dc;
+
+    border: 4px double #dfb64b;
+
+    border-radius: 20px;
+}
+
+
+.certificate h2 {
+    color: #80672d;
+
+    margin-bottom: 10px;
+}
+
+
+.certificate p {
+    line-height: 1.6;
+
+    margin: 8px 0;
+}
+
+
+/* =====================================================
+   21. MOBILE RESPONSIVE DESIGN
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .top-bar {
+        padding: 10px 15px;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+
+    .logo {
+        font-size: 1rem;
+    }
+
+
+    .student-name {
+        font-size: 0.75rem;
+    }
+
+
+    .screen {
+        padding: 30px 15px;
+    }
+
+
+    .lesson-card {
+        grid-template-columns: 1fr;
+
+        padding: 20px;
+    }
+
+
+    .lesson-text {
+        text-align: center;
+    }
+
+
+    .designer-area {
+        grid-template-columns: 1fr;
+    }
+
+
+    .shape-selection {
+        order: 1;
+    }
+
+
+    .my-garden {
+        order: 2;
+    }
+
+
+    .welcome-content h1 {
+        font-size: 2.5rem;
+    }
+
+
+    .garden-svg {
+        width: 100%;
+    }
+
+
+    .calculation-card {
+        padding: 22px;
+    }
+
+}
+
+
+/* =====================================================
+   22. SMALL PHONE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .top-bar {
+        justify-content: center;
+
+        text-align: center;
+    }
+
+
+    .logo {
+        width: 100%;
+    }
+
+
+    .student-name {
+        width: 80%;
+    }
+
+
+    .sound-button {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .welcome-content h1 {
+        font-size: 2rem;
+    }
+
+
+    .magic-flowers {
+        font-size: 1.5rem;
+
+        letter-spacing: 3px;
+    }
+
+
+    .main-button {
+        width: 100%;
+    }
+
+
+    .shape-button {
+        font-size: 0.9rem;
+    }
+
+
+    .calculation-expression {
+        font-size: 1rem;
+    }
+
+}
