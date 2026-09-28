@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Magical Garden Fence</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         GAME CONTAINER
+    ========================== -->
+
+    <div class="game-container">
+
+        <!-- =========================
+             TOP BAR
+        ========================== -->
+
+        <header class="top-bar">
+
+            <div class="logo">
+                🌷 Magical Garden Fence
+            </div>
+
+            <div class="student-name">
+                Created by <strong>Khairisya Damia</strong>
+            </div>
+
+            <button id="soundButton" class="sound-button">
+                🔊
+            </button>
+
+        </header>
+
+
+        <!-- =========================
+             SCREEN 1 — WELCOME
+        ========================== -->
+
+        <section id="welcomeScreen" class="screen active">
+
+            <div class="welcome-content">
+
+                <div class="magic-flowers">
+                    🌸 🦋 🌷 ✨ 🌼
+                </div>
+
+                <h1>
+                    Magical Garden Fence
+                </h1>
+
+                <h2>
+                    🌿 A Year 5 Mathematics Adventure 🌿
+                </h2>
+
+                <div class="creator-card">
+
+                    <p>
+                        Created by
+                    </p>
+
+                    <h3>
+                        Khairisya Damia
+                    </h3>
+
+                    <p>
+                        Mathematics — Year 5
+                    </p>
+
+                    <p>
+                        DSKP 6.3.1
+                    </p>
+
+                </div>
+
+                <div class="story-box">
+
+                    <p>
+                        🌷 Welcome, Junior Garden Designer!
+                    </p>
+
+                    <p>
+                        A magical garden needs a beautiful fence.
+                        Your mission is to discover the outside boundary,
+                        calculate its perimeter, and build the perfect fence!
+                    </p>
+
+                </div>
+
+                <button
+                    class="main-button"
+                    onclick="startGame()">
+                    ✨ Start Adventure
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SCREEN 2 — DISCOVER BOUNDARY
+        ========================== -->
+
+        <section id="boundaryScreen" class="screen">
+
+            <div class="section-title">
+
+                <span>🌱 Level 1</span>
+
+                <h2>
+                    Discover the Boundary
+                </h2>
+
+                <p>
+                    Before building a fence, we need to know
+                    what the outside boundary is!
+                </p>
+
+            </div>
+
+
+            <div class="lesson-card">
+
+                <div class="garden-preview">
+
+                    <div class="simple-garden">
+
+                        <div class="garden-house">
+                            🏡
+                        </div>
+
+                        <div class="garden-flower">
+                            🌷
+                        </div>
+
+                        <div class="garden-flower second">
+                            🌼
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="lesson-text">
+
+                    <h3>
+                        🌿 What is perimeter?
+                    </h3>
+
+                    <p>
+                        The <strong>perimeter</strong> is the total
+                        distance around the <strong>outside boundary</strong>
+                        of a shape.
+                    </p>
+
+                    <div class="important-box">
+
+                        💡 Remember:
+
+                        <strong>
+                            Perimeter = distance around the outside
+                            boundary.
+                        </strong>
+
+                    </div>
+
+                    <button
+                        class="main-button"
+                        onclick="goToFenceLevel()">
+
+                        🌷 Let's Build a Fence
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SCREEN 3 — FIND THE FENCE
+        ========================== -->
+
+        <section id="fenceScreen" class="screen">
+
+            <div class="section-title">
+
+                <span>🚧 Level 2</span>
+
+                <h2>
+                    Find the Magical Fence
+                </h2>
+
+                <p>
+                    Click the sides that belong to the
+                    <strong>outside boundary</strong>.
+                </p>
+
+            </div>
+
+
+            <div class="instruction-box">
+
+                🌟
+                <strong>Your mission:</strong>
+
+                Select every side that needs a fence.
+
+                <br>
+
+                Remember:
+                <strong>
+                    Internal sides do NOT need a fence.
+                </strong>
+
+            </div>
+
+
+            <!-- COMBINED SHAPE -->
+
+            <div class="shape-area">
+
+                <svg
+                    id="gardenSVG"
+                    viewBox="0 0 600 400"
+                    class="garden-svg">
+
+                    <!-- RECTANGLE -->
+
+                    <polygon
+                        points="170,150 430,150 430,330 170,330"
+                        class="garden-shape rectangle-shape">
+                    </polygon>
+
+
+                    <!-- ISOSCELES TRIANGLE -->
+
+                    <polygon
+                        points="170,150 300,50 430,150"
+                        class="garden-shape triangle-shape">
+                    </polygon>
+
+
+                    <!-- SIDE 1 -->
+
+                    <line
+                        x1="170"
+                        y1="150"
+                        x2="300"
+                        y2="50"
+                        class="clickable-side outside-side"
+                        data-side="1"
+                        data-length="5">
+                    </line>
+
+
+                    <!-- SIDE 2 -->
+
+                    <line
+                        x1="300"
+                        y1="50"
+                        x2="430"
+                        y2="150"
+                        class="clickable-side outside-side"
+                        data-side="2"
+                        data-length="5">
+                    </line>
+
+
+                    <!-- SIDE 3 -->
+
+                    <line
+                        x1="430"
+                        y1="150"
+                        x2="430"
+                        y2="330"
+                        class="clickable-side outside-side"
+                        data-side="3"
+                        data-length="6">
+                    </line>
+
+
+                    <!-- INTERNAL SHARED SIDE -->
+
+                    <line
+                        x1="170"
+                        y1="150"
+                        x2="430"
+                        y2="150"
+                        class="clickable-side internal-side"
+                        data-side="4"
+                        data-length="8">
+                    </line>
+
+
+                    <!-- SIDE 5 -->
+
+                    <line
+                        x1="430"
+                        y1="330"
+                        x2="170"
+                        y2="330"
+                        class="clickable-side outside-side"
+                        data-side="5"
+                        data-length="8">
+                    </line>
+
+
+                    <!-- SIDE 6 -->
+
+                    <line
+                        x1="170"
+                        y1="330"
+                        x2="170"
+                        y2="150"
+                        class="clickable-side outside-side"
+                        data-side="6"
+                        data-length="6">
+                    </line>
+
+                </svg>
+
+            </div>
+
+
+            <div class="feedback-area">
+
+                <p id="fenceInstruction">
+                    👆 Click a side of the garden.
+                </p>
+
+                <div id="feedbackMessage"></div>
+
+            </div>
+
+
+            <div class="selected-sides">
+
+                <h3>
+                    🪵 Selected Fence Sides
+                </h3>
+
+                <div id="selectedSidesList">
+                    None selected yet.
+                </div>
+
+            </div>
+
+
+            <button
+                id="continueCalculationButton"
+                class="main-button hidden"
+                onclick="goToCalculationLevel()">
+
+                🧮 Calculate Perimeter
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             SCREEN 4 — CALCULATE
+        ========================== -->
+
+        <section id="calculationScreen" class="screen">
+
+            <div class="section-title">
+
+                <span>🧮 Level 3</span>
+
+                <h2>
+                    Calculate the Magical Fence
+                </h2>
+
+                <p>
+                    Now calculate the total length of the
+                    outside fence.
+                </p>
+
+            </div>
+
+
+            <div class="calculation-card">
+
+                <div class="calculation-visual">
+
+                    <div class="fence-icon">
+                        🏡
+                    </div>
+
+                </div>
+
+
+                <h3>
+                    Add the outside sides together:
+                </h3>
+
+
+                <div
+                    id="calculationSides"
+                    class="calculation-expression">
+
+                </div>
+
+
+                <p>
+                    Remember:
+                    <strong>
+                        You need to do the calculation yourself!
+                    </strong>
+                </p>
+
+
+                <div class="answer-area">
+
+                    <label for="perimeterAnswer">
+                        What is the perimeter?
+                    </label>
+
+                    <div class="answer-input-container">
+
+                        <input
+                            type="number"
+                            id="perimeterAnswer"
+                            placeholder="Enter your answer">
+
+                        <span>
+                            m
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="main-button"
+                        onclick="checkPerimeter()">
+
+                        ✨ Check Answer
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="calculationFeedback"
+                    class="calculation-feedback">
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="designGardenButton"
+                class="main-button hidden"
+                onclick="goToDesignLevel()">
+
+                🌷 Design My Magical Garden
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             SCREEN 5 — DESIGN GARDEN
+        ========================== -->
+
+        <section id="designScreen" class="screen">
+
+            <div class="section-title">
+
+                <span>🌷 Level 4</span>
+
+                <h2>
+                    Design Your Magical Garden
+                </h2>
+
+                <p>
+                    Create your own garden using the shapes!
+                </p>
+
+            </div>
+
+
+            <div class="designer-area">
+
+                <div class="shape-selection">
+
+                    <h3>
+                        🌱 Choose a shape
+                    </h3>
+
+                    <button
+                        class="shape-button"
+                        onclick="addGardenShape('rectangle')">
+
+                        ▭ Rectangle
+
+                    </button>
+
+                    <button
+                        class="shape-button"
+                        onclick="addGardenShape('equilateral')">
+
+                        🔺 Equilateral Triangle
+
+                    </button>
+
+                    <button
+                        class="shape-button"
+                        onclick="addGardenShape('isosceles')">
+
+                        🔺 Isosceles Triangle
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="myGarden"
+                    class="my-garden">
+
+                    <div class="garden-message">
+
+                        🌸
+                        <p>
+                            Your magical garden is empty.
+                        </p>
+
+                        <p>
+                            Choose some shapes to begin!
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="main-button"
+                onclick="buildMyFence()">
+
+                ✨ Build My Fence
+
+            </button>
+
+
+            <div
+                id="designFeedback"
+                class="design-feedback">
+
+            </div>
+
+
+            <button
+                id="finalChallengeButton"
+                class="main-button hidden"
+                onclick="goToFinalChallenge()">
+
+                🏆 Final Challenge
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             SCREEN 6 — FINAL CHALLENGE
+        ========================== -->
+
+        <section id="finalScreen" class="screen">
+
+            <div class="final-card">
+
+                <div class="magic-flowers">
+                    🌸 🦋 🌷 ✨ 🌼
+                </div>
+
+                <h1>
+                    🏆 Final Challenge
+                </h1>
+
+                <p>
+                    You are almost a Magical Garden Master!
+                </p>
+
+
+                <div class="quiz-question">
+
+                    <h3>
+                        Which sides are included when
+                        finding the perimeter?
+                    </h3>
+
+                    <button
+                        class="quiz-option"
+                        onclick="checkQuiz(false)">
+
+                        A. All sides, including internal sides
+
+                    </button>
+
+                    <button
+                        class="quiz-option"
+                        onclick="checkQuiz(true)">
+
+                        B. Only the outside boundary
+
+                    </button>
+
+                    <button
+                        class="quiz-option"
+                        onclick="checkQuiz(false)">
+
+                        C. Only the shortest sides
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="quizFeedback"
+                    class="quiz-feedback">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SCREEN 7 — COMPLETION
+        ========================== -->
+
+        <section id="completionScreen" class="screen">
+
+            <div class="completion-card">
+
+                <div class="celebration">
+
+                    🌷 ✨ 🦋 🌸 ✨ 🌼
+
+                </div>
+
+                <h1>
+                    Magical Garden Master!
+                </h1>
+
+                <p>
+                    🎉 Congratulations, Khairisya Damia!
+                </p>
+
+                <p>
+                    You successfully learned how to identify
+                    the outside boundary and calculate perimeter.
+                </p>
+
+                <div class="certificate">
+
+                    <h2>
+                        🌷 Magical Garden Fence 🌷
+                    </h2>
+
+                    <p>
+                        Awarded to
+                    </p>
+
+                    <h2>
+                        Khairisya Damia
+                    </h2>
+
+                    <p>
+                        For completing the Year 5
+                        Mathematics Perimeter Adventure
+                    </p>
+
+                    <p>
+                        DSKP 6.3.1
+                    </p>
+
+                </div>
+
+                <button
+                    class="main-button"
+                    onclick="restartGame()">
+
+                    🔄 Play Again
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
