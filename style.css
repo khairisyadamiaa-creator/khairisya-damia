@@ -1,13 +1,14 @@
-/* =====================================================
-   MAGICAL GARDEN FENCE
+/* =========================================================
+   🌷 MAGICAL GARDEN FENCE
+   Year 5 Mathematics - Perimeter
+   DSKP 6.3.1
    Created by Khairisya Damia
-   Year 5 Mathematics — DSKP 6.3.1
-===================================================== */
+   ========================================================= */
 
 
-/* =====================================================
-   1. GENERAL PAGE
-===================================================== */
+/* =========================================================
+   1. GENERAL
+   ========================================================= */
 
 * {
     box-sizing: border-box;
@@ -15,549 +16,509 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: "Trebuchet MS", Arial, sans-serif;
+    background: #f8fff8;
+    color: #304b36;
     min-height: 100vh;
+    overflow-x: hidden;
+}
 
-    background:
-        linear-gradient(
-            180deg,
-            #f4fff5 0%,
-            #e8f8e8 55%,
-            #d8f0d7 100%
-        );
+button {
+    font-family: inherit;
+}
 
-    color: #31523a;
+button,
+.clickable-side {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus {
+    outline: none;
 }
 
 
-/* =====================================================
-   2. GAME CONTAINER
-===================================================== */
-
-.game-container {
-    width: 100%;
-    min-height: 100vh;
-}
-
-
-/* =====================================================
-   3. TOP BAR
-===================================================== */
+/* =========================================================
+   2. TOP BAR
+   ========================================================= */
 
 .top-bar {
-    width: 100%;
-    min-height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 2px solid #dcefdc;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 12px 25px;
+    padding: 0 25px;
 
-    background: rgba(255, 255, 255, 0.94);
+    z-index: 1000;
 
-    border-bottom: 2px solid #c9e7c9;
-
-    box-shadow:
-        0 3px 12px rgba(70, 120, 70, 0.12);
-
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    box-shadow: 0 3px 15px rgba(68, 110, 72, 0.08);
 }
 
+.game-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-.logo {
-    font-size: 1.3rem;
+    font-size: 20px;
     font-weight: bold;
-
-    color: #3d774b;
+    color: #39734a;
 }
 
-
-.student-name {
-    font-size: 0.9rem;
-    color: #617568;
+.creator-name {
+    font-size: 13px;
+    color: #78927d;
 }
-
 
 .sound-button {
+    border: none;
+    background: #fff5c7;
+
     width: 45px;
     height: 45px;
 
-    border: none;
     border-radius: 50%;
-
-    background: #fff4bd;
-
-    font-size: 1.2rem;
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-}
+    font-size: 20px;
 
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+
+    transition: 0.2s;
+}
 
 .sound-button:hover {
     transform: scale(1.08);
-    background: #ffe995;
+}
+
+.sound-button:active {
+    transform: scale(0.94);
 }
 
 
-/* =====================================================
-   4. SCREEN SYSTEM
-===================================================== */
+/* =========================================================
+   3. SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 70px;
+    left: 0;
+
+    width: 245px;
+    height: calc(100vh - 70px);
+
+    background: #ffffff;
+
+    border-right: 2px solid #dcefdc;
+
+    padding: 25px 15px;
+
+    z-index: 900;
+
+    overflow-y: auto;
+
+    box-shadow: 4px 0 15px rgba(50, 100, 60, 0.05);
+
+    transition: transform 0.3s ease;
+}
+
+.sidebar-title {
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #39734a;
+
+    margin-bottom: 20px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-button {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #f3faf3;
+
+    color: #42674b;
+
+    text-align: left;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.sidebar-button:hover {
+    background: #e4f5e5;
+    transform: translateX(3px);
+}
+
+.sidebar-button.active {
+    background: #d5efd8;
+    color: #28663a;
+
+    box-shadow: inset 4px 0 0 #5ca86c;
+}
+
+.sidebar-button .icon {
+    display: inline-block;
+    width: 28px;
+}
+
+
+/* =========================================================
+   4. MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    margin-left: 245px;
+
+    padding-top: 70px;
+
+    min-height: 100vh;
+
+    transition: margin-left 0.3s ease;
+}
 
 .screen {
     display: none;
 
-    width: 100%;
     min-height: calc(100vh - 70px);
 
-    padding: 45px 20px;
+    padding: 35px 30px;
 
-    text-align: center;
+    animation: fadeIn 0.35s ease;
 }
-
 
 .screen.active {
     display: block;
-
-    animation:
-        screenAppear 0.5s ease;
 }
 
-
-@keyframes screenAppear {
-
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(15px);
+        transform: translateY(8px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
 
 
-/* =====================================================
+/* =========================================================
    5. WELCOME SCREEN
-===================================================== */
+   ========================================================= */
 
-.welcome-content {
-    max-width: 900px;
-    margin: 0 auto;
+.welcome-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    padding-top: 30px;
+    text-align: center;
+
+    background:
+        radial-gradient(circle at 15% 20%, #e7f7e8 0, transparent 25%),
+        radial-gradient(circle at 85% 80%, #fff2c9 0, transparent 25%),
+        #f8fff8;
 }
 
+.welcome-card {
+    width: min(800px, 95%);
 
-.magic-flowers {
-    font-size: 2rem;
+    background: white;
 
-    letter-spacing: 8px;
+    border-radius: 30px;
 
-    margin-bottom: 15px;
+    padding: 45px 30px;
 
-    animation:
-        floatingFlowers 3s ease-in-out infinite;
+    box-shadow: 0 10px 35px rgba(64, 110, 70, 0.12);
+
+    border: 2px solid #e1f1e2;
 }
 
-
-@keyframes floatingFlowers {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-
-}
-
-
-.welcome-content h1 {
-    font-size: clamp(2.3rem, 7vw, 4.5rem);
-
-    color: #3c7548;
-
-    margin-bottom: 12px;
-
-    text-shadow:
-        2px 2px 0 #ffffff;
-}
-
-
-.welcome-content h2 {
-    font-size: 1.3rem;
-
-    font-weight: normal;
-
-    color: #65836b;
-
-    margin-bottom: 30px;
-}
-
-
-.creator-card {
-    display: inline-block;
-
-    padding: 18px 35px;
-
-    margin-bottom: 25px;
-
-    background: rgba(255, 255, 255, 0.85);
-
-    border: 2px solid #cce7ca;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 8px 20px rgba(67, 117, 67, 0.1);
-}
-
-
-.creator-card p {
-    margin: 5px;
-}
-
-
-.creator-card h3 {
-    color: #3d774b;
-
-    font-size: 1.4rem;
-
-    margin: 5px 0;
-}
-
-
-/* =====================================================
-   6. STORY BOX
-===================================================== */
-
-.story-box {
-    max-width: 700px;
-
-    margin: 0 auto 30px;
-
-    padding: 25px;
-
-    background: #ffffff;
-
-    border-radius: 25px;
-
-    border-left: 7px solid #f5c85b;
-
-    box-shadow:
-        0 8px 20px rgba(75, 115, 75, 0.12);
-
-    line-height: 1.7;
-
-    font-size: 1.05rem;
-}
-
-
-.story-box p:first-child {
-    font-size: 1.2rem;
-
-    font-weight: bold;
-
-    color: #547b58;
+.welcome-flower {
+    font-size: 55px;
 
     margin-bottom: 10px;
 }
 
+.welcome-card h1 {
+    font-size: clamp(32px, 6vw, 55px);
 
-/* =====================================================
-   7. MAIN BUTTON
-===================================================== */
+    color: #39734a;
 
-.main-button {
-    border: none;
-
-    padding: 15px 30px;
-
-    border-radius: 30px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f7c95d,
-            #f2b947
-        );
-
-    color: #4d4427;
-
-    font-size: 1rem;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 5px 0 #d79e2e,
-        0 8px 15px rgba(120, 100, 40, 0.18);
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
+    margin-bottom: 12px;
 }
 
+.welcome-card h2 {
+    font-size: 20px;
 
-.main-button:hover {
-    transform: translateY(-2px);
+    color: #7b987e;
 
-    box-shadow:
-        0 7px 0 #d79e2e,
-        0 10px 18px rgba(120, 100, 40, 0.2);
+    font-weight: normal;
+
+    margin-bottom: 25px;
 }
 
+.welcome-card p {
+    line-height: 1.7;
 
-.main-button:active {
-    transform: translateY(3px);
+    color: #607663;
 
-    box-shadow:
-        0 2px 0 #d79e2e;
-}
-
-
-.hidden {
-    display: none !important;
-}
-
-
-/* =====================================================
-   8. SECTION TITLE
-===================================================== */
-
-.section-title {
-    max-width: 850px;
+    max-width: 600px;
 
     margin: 0 auto 25px;
 }
 
-
-.section-title span {
+.dskp-badge {
     display: inline-block;
 
-    padding: 7px 15px;
+    background: #eef8df;
 
-    background: #e5f5e1;
+    color: #5c8140;
 
-    color: #4b7952;
+    padding: 8px 16px;
 
     border-radius: 20px;
 
-    font-size: 0.9rem;
+    font-size: 13px;
 
-    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   6. GENERAL HEADINGS
+   ========================================================= */
+
+.section-title {
+    text-align: center;
+
+    color: #39734a;
+
+    font-size: clamp(27px, 4vw, 40px);
 
     margin-bottom: 12px;
 }
 
+.section-subtitle {
+    text-align: center;
 
-.section-title h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    color: #78927d;
 
-    color: #3e7148;
+    max-width: 700px;
 
-    margin-bottom: 10px;
-}
-
-
-.section-title p {
-    color: #65796a;
+    margin: 0 auto 30px;
 
     line-height: 1.6;
 }
 
 
-/* =====================================================
-   9. LESSON CARD
-===================================================== */
+/* =========================================================
+   7. BUTTONS
+   ========================================================= */
 
-.lesson-card {
-    max-width: 950px;
+.primary-button {
+    border: none;
 
-    margin: 0 auto;
+    background: #68ad72;
 
-    display: grid;
+    color: white;
 
-    grid-template-columns: 1fr 1fr;
-
-    gap: 30px;
-
-    padding: 30px;
-
-    background: #ffffff;
-
-    border-radius: 30px;
-
-    box-shadow:
-        0 10px 30px rgba(60, 100, 65, 0.12);
-}
-
-
-.garden-preview {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 300px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #dff5df,
-            #c9eac7
-        );
-
-    border-radius: 25px;
-}
-
-
-.simple-garden {
-    position: relative;
-
-    width: 260px;
-    height: 190px;
-
-    background: #9ed18f;
-
-    border: 8px solid #d9b56d;
+    padding: 13px 25px;
 
     border-radius: 15px;
 
-    box-shadow:
-        0 6px 0 #a78551;
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(75, 140, 85, 0.2);
+
+    transition: all 0.2s ease;
+}
+
+.primary-button:hover {
+    background: #579d62;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 14px rgba(75, 140, 85, 0.22);
+}
+
+.primary-button:active {
+    transform: translateY(1px);
+}
+
+.secondary-button {
+    border: 2px solid #cde5cf;
+
+    background: white;
+
+    color: #4c7955;
+
+    padding: 11px 22px;
+
+    border-radius: 15px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.secondary-button:hover {
+    background: #f1faf2;
 }
 
 
-.garden-house {
-    position: absolute;
+/* =========================================================
+   8. LESSON / BOUNDARY CARD
+   ========================================================= */
 
-    font-size: 55px;
+.lesson-card {
+    width: min(850px, 95%);
 
-    left: 95px;
-    top: 60px;
+    margin: 0 auto;
+
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    box-shadow: 0 8px 25px rgba(60, 100, 65, 0.1);
+
+    border: 2px solid #e1f1e2;
 }
 
+.lesson-visual {
+    min-height: 280px;
 
-.garden-flower {
-    position: absolute;
+    background: #eef9ee;
 
-    font-size: 30px;
+    border-radius: 20px;
 
-    left: 25px;
-    bottom: 20px;
-}
-
-
-.garden-flower.second {
-    left: auto;
-    right: 25px;
-}
-
-
-/* =====================================================
-   10. LESSON TEXT
-===================================================== */
-
-.lesson-text {
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
 
     justify-content: center;
 
-    text-align: left;
+    margin-bottom: 25px;
 
-    line-height: 1.7;
+    position: relative;
 }
 
+.lesson-info {
+    background: #eef7ff;
 
-.lesson-text h3 {
-    color: #4b7c52;
+    border-left: 5px solid #6ca7d9;
 
-    font-size: 1.5rem;
-
-    margin-bottom: 15px;
-}
-
-
-.lesson-text p {
-    margin-bottom: 15px;
-}
-
-
-.important-box {
-    padding: 15px;
-
-    background: #fff7cf;
-
-    border-left: 5px solid #f2c34f;
+    padding: 15px 18px;
 
     border-radius: 10px;
+
+    line-height: 1.6;
 
     margin-bottom: 20px;
 }
 
 
-/* =====================================================
-   11. INSTRUCTION BOX
-===================================================== */
+/* =========================================================
+   9. FENCE GAME AREA
+   ========================================================= */
 
-.instruction-box {
-    max-width: 800px;
-
-    margin: 0 auto 20px;
-
-    padding: 15px 20px;
-
-    background: #ffffff;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 5px 15px rgba(70, 110, 70, 0.1);
-
-    line-height: 1.6;
-}
-
-
-/* =====================================================
-   12. SVG GARDEN
-===================================================== */
-
-.shape-area {
-    max-width: 800px;
+.fence-container {
+    width: min(1000px, 96%);
 
     margin: 0 auto;
 
-    padding: 15px;
+    background: white;
 
-    background: #ffffff;
+    border-radius: 25px;
 
-    border-radius: 30px;
+    padding: 25px;
 
-    box-shadow:
-        0 10px 25px rgba(60, 100, 65, 0.12);
+    border: 2px solid #e0f0e1;
+
+    box-shadow: 0 8px 25px rgba(60, 100, 65, 0.1);
 }
 
+.fence-instruction {
+    text-align: center;
 
-.garden-svg {
+    background: #eef8ef;
+
+    padding: 14px;
+
+    border-radius: 15px;
+
+    margin-bottom: 20px;
+
+    color: #456d4c;
+
+    line-height: 1.5;
+}
+
+.garden-svg-wrapper {
     width: 100%;
 
-    max-width: 700px;
+    min-height: 400px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        radial-gradient(circle at 20% 20%, #effbea, transparent 25%),
+        radial-gradient(circle at 80% 70%, #fff8da, transparent 25%),
+        #f8fff8;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    padding: 20px;
+}
+
+.garden-svg {
+    width: min(650px, 100%);
 
     height: auto;
 
@@ -565,779 +526,791 @@ body {
 }
 
 
-.garden-shape {
-    stroke: #527c50;
+/* =========================================================
+   10. IMPORTANT — EASY TOUCH FENCE SIDES
+   ========================================================= */
 
-    stroke-width: 3;
+/*
+   These sides are intentionally thick for TOUCHING.
 
-    stroke-linejoin: round;
-}
-
-
-.rectangle-shape {
-    fill: #bfe6ad;
-}
-
-
-.triangle-shape {
-    fill: #d8f0bd;
-}
-
-
-/* =====================================================
-   13. CLICKABLE SIDES
-===================================================== */
+   The visible garden fence can remain visually thin,
+   while the actual clickable/touch area is larger.
+*/
 
 .clickable-side {
-    stroke-width: 14;
-
-    stroke-linecap: round;
-
-    fill: none;
-
     cursor: pointer;
 
-    opacity: 0;
+    pointer-events: stroke;
+
+    stroke-width: 14px !important;
+
+    touch-action: manipulation;
 
     transition:
+        stroke-width 0.2s ease,
         opacity 0.2s ease,
-        stroke-width 0.2s ease;
+        filter 0.2s ease;
 }
-
 
 .clickable-side:hover {
-    opacity: 0.35;
+    stroke-width: 18px !important;
 
-    stroke: #f4c84f;
-
-    stroke-width: 18;
+    filter: brightness(1.08);
 }
 
+.clickable-side:active {
+    stroke-width: 20px !important;
+}
+
+
+/* Selected side */
 
 .clickable-side.selected {
-    opacity: 1;
-
-    stroke: #e5a82f;
-
-    stroke-width: 9;
-
-    animation:
-        fenceGlow 1s ease;
+    stroke-width: 18px !important;
 }
 
+
+/* Correct side */
+
+.clickable-side.correct {
+    stroke-width: 18px !important;
+}
+
+
+/* Wrong side */
 
 .clickable-side.wrong {
-    opacity: 1;
+    stroke-width: 18px !important;
 
-    stroke: #d98263;
-
-    stroke-width: 9;
-
-    animation:
-        gentleShake 0.4s ease;
+    animation: wrongShake 0.35s ease;
 }
 
-
-@keyframes fenceGlow {
-
+@keyframes wrongShake {
     0% {
-        stroke-dasharray: 0 1000;
-    }
-
-    100% {
-        stroke-dasharray: 1000 0;
-    }
-
-}
-
-
-@keyframes gentleShake {
-
-    0%,
-    100% {
         transform: translateX(0);
     }
 
     25% {
-        transform: translateX(-3px);
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
     }
 
     75% {
-        transform: translateX(3px);
+        transform: translateX(-3px);
     }
 
+    100% {
+        transform: translateX(0);
+    }
 }
 
 
-/* =====================================================
-   14. FEEDBACK
-===================================================== */
+/* =========================================================
+   11. SIDE LENGTH LABELS
+   ========================================================= */
 
-.feedback-area {
-    min-height: 70px;
+.side-label {
+    font-size: 16px;
+
+    font-weight: bold;
+
+    fill: #315b3a;
+
+    pointer-events: none;
+
+    user-select: none;
+}
+
+.internal-label {
+    fill: #879c8b;
+
+    font-size: 15px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   12. FEEDBACK MESSAGE
+   ========================================================= */
+
+.feedback-box {
+    margin: 20px auto 0;
 
     max-width: 750px;
 
-    margin: 15px auto;
-}
-
-
-#fenceInstruction {
-    color: #5d7462;
-
-    margin-bottom: 8px;
-}
-
-
-#feedbackMessage {
-    font-weight: bold;
-
-    min-height: 25px;
-}
-
-
-.feedback-correct {
-    color: #4c8a54;
-}
-
-
-.feedback-wrong {
-    color: #b96b52;
-}
-
-
-/* =====================================================
-   15. SELECTED SIDES
-===================================================== */
-
-.selected-sides {
-    max-width: 650px;
-
-    margin: 15px auto 20px;
-
-    padding: 15px;
-
-    background: rgba(255, 255, 255, 0.9);
-
-    border-radius: 20px;
-}
-
-
-.selected-sides h3 {
-    margin-bottom: 8px;
-
-    color: #55765b;
-}
-
-
-#selectedSidesList {
-    min-height: 25px;
-
-    color: #65766a;
-}
-
-
-/* =====================================================
-   16. CALCULATION CARD
-===================================================== */
-
-.calculation-card {
-    max-width: 700px;
-
-    margin: 0 auto 25px;
-
-    padding: 30px;
-
-    background: #ffffff;
-
-    border-radius: 30px;
-
-    box-shadow:
-        0 10px 30px rgba(60, 100, 65, 0.12);
-}
-
-
-.calculation-visual {
-    margin-bottom: 10px;
-}
-
-
-.fence-icon {
-    font-size: 4rem;
-
-    animation:
-        floatingFlowers 2.5s ease-in-out infinite;
-}
-
-
-.calculation-card h3 {
-    color: #4e7655;
-
-    margin-bottom: 15px;
-}
-
-
-.calculation-expression {
-    padding: 18px;
-
-    margin: 15px auto;
-
-    background: #f4fae9;
-
-    border: 2px dashed #a7c994;
+    padding: 15px 20px;
 
     border-radius: 15px;
 
-    font-size: 1.3rem;
+    text-align: center;
+
+    line-height: 1.5;
 
     font-weight: bold;
 
-    color: #536e4e;
+    transition: all 0.25s ease;
+}
+
+.feedback-box.correct {
+    background: #e7f7e9;
+
+    color: #367343;
+
+    border: 2px solid #bfe2c3;
+}
+
+.feedback-box.wrong {
+    background: #fff3dc;
+
+    color: #8a682d;
+
+    border: 2px solid #f0d79b;
+}
+
+.feedback-box.info {
+    background: #eef6ff;
+
+    color: #476d91;
+
+    border: 2px solid #c9def2;
 }
 
 
-.answer-area {
-    margin-top: 20px;
+/* =========================================================
+   13. CALCULATION SECTION
+   ========================================================= */
+
+.calculation-card {
+    width: min(700px, 95%);
+
+    margin: 0 auto;
+
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    box-shadow: 0 8px 25px rgba(60, 100, 65, 0.1);
+
+    border: 2px solid #e0f0e1;
+
+    text-align: center;
 }
 
+.selected-sides {
+    background: #f2faf2;
 
-.answer-area label {
-    display: block;
+    border-radius: 15px;
+
+    padding: 18px;
+
+    margin: 20px 0;
+
+    min-height: 55px;
+
+    color: #4d7054;
 
     font-weight: bold;
 
-    margin-bottom: 10px;
+    line-height: 1.8;
 }
 
+.calculation-input {
+    width: min(300px, 90%);
 
-.answer-input-container {
-    display: flex;
+    padding: 14px 18px;
 
-    align-items: center;
-    justify-content: center;
+    border: 2px solid #cfe4d1;
 
-    gap: 8px;
-
-    margin-bottom: 15px;
-}
-
-
-.answer-input-container input {
-    width: 180px;
-
-    padding: 13px;
-
-    border: 2px solid #b8d6b3;
-
-    border-radius: 12px;
-
-    font-size: 1.1rem;
+    border-radius: 15px;
 
     text-align: center;
 
+    font-size: 20px;
+
+    color: #345c3d;
+
     outline: none;
+
+    margin: 15px auto;
 }
 
+.calculation-input:focus {
+    border-color: #68ad72;
 
-.answer-input-container input:focus {
-    border-color: #6ca36e;
-
-    box-shadow:
-        0 0 0 3px rgba(108, 163, 110, 0.12);
+    box-shadow: 0 0 0 4px rgba(104, 173, 114, 0.12);
 }
 
-
-.calculation-feedback {
-    min-height: 50px;
-
-    margin-top: 15px;
-
+.unit-label {
     font-weight: bold;
 
-    line-height: 1.5;
+    color: #6c866f;
 }
 
 
-/* =====================================================
-   17. DESIGNER
-===================================================== */
+/* =========================================================
+   14. DESIGN YOUR OWN GARDEN
+   ========================================================= */
 
-.designer-area {
-    max-width: 1000px;
+.design-container {
+    width: min(1000px, 96%);
 
-    margin: 0 auto 20px;
+    margin: 0 auto;
 
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    box-shadow: 0 8px 25px rgba(60, 100, 65, 0.1);
+
+    border: 2px solid #e0f0e1;
+}
+
+.design-layout {
     display: grid;
 
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 220px 1fr;
 
     gap: 20px;
 }
 
 
-.shape-selection {
-    padding: 20px;
+/* Shape toolbox */
 
-    background: #ffffff;
+.shape-toolbox {
+    background: #f3faf3;
 
-    border-radius: 25px;
+    border-radius: 20px;
 
-    box-shadow:
-        0 8px 20px rgba(60, 100, 65, 0.1);
+    padding: 18px;
+
+    border: 2px solid #deefdf;
 }
 
+.shape-toolbox h3 {
+    color: #39734a;
 
-.shape-selection h3 {
-    color: #527653;
+    text-align: center;
 
     margin-bottom: 15px;
 }
 
-
-.shape-button {
-    display: block;
-
+.shape-option {
     width: 100%;
 
-    margin-bottom: 12px;
+    border: 2px solid #d3e8d5;
 
-    padding: 12px;
-
-    border: 2px solid #cce3c8;
+    background: white;
 
     border-radius: 15px;
 
-    background: #f7fff4;
+    padding: 12px;
 
-    color: #4d6f51;
+    margin-bottom: 10px;
 
     cursor: pointer;
 
+    color: #4b7152;
+
     font-weight: bold;
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
+    transition: 0.2s;
 }
 
-
-.shape-button:hover {
-    background: #e9f7e3;
+.shape-option:hover {
+    background: #eaf7eb;
 
     transform: translateY(-2px);
 }
 
+.shape-option.selected {
+    border-color: #68ad72;
 
-.my-garden {
-    min-height: 350px;
+    background: #e4f5e5;
 
-    padding: 25px;
+    box-shadow: 0 3px 8px rgba(80, 130, 90, 0.12);
+}
+
+
+/* Design canvas */
+
+.design-canvas {
+    min-height: 430px;
+
+    border-radius: 20px;
+
+    border: 3px dashed #c9e2cb;
 
     background:
-        linear-gradient(
-            180deg,
-            #dff3d9,
-            #c5e6bc
-        );
+        radial-gradient(circle, #dcefdc 1px, transparent 1px);
 
-    border-radius: 30px;
+    background-size: 25px 25px;
 
-    border: 5px solid #b3d5a7;
+    position: relative;
+
+    overflow: hidden;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
 
-    flex-wrap: wrap;
+    align-items: center;
+}
 
-    gap: 15px;
+.design-empty-message {
+    text-align: center;
 
-    box-shadow:
-        inset 0 0 25px rgba(70, 120, 70, 0.08);
+    color: #7b987e;
+
+    padding: 20px;
 }
 
 
-.garden-message {
-    color: #678067;
-
-    line-height: 1.7;
-}
-
+/* Shape previews */
 
 .design-shape {
-    width: 120px;
-    height: 120px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 3rem;
-
-    background: #bde3ad;
-
-    border: 4px solid #729d69;
+    position: relative;
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease;
-}
+    user-select: none;
 
+    transition: transform 0.2s ease;
+}
 
 .design-shape:hover {
     transform: scale(1.05);
 }
 
-
-.design-rectangle {
-    border-radius: 8px;
-
-    width: 160px;
-}
-
-
 .design-equilateral {
-    clip-path:
-        polygon(
-            50% 0%,
-            100% 100%,
-            0% 100%
-        );
+    width: 100px;
+    height: 86px;
 
-    border: none;
+    background: #9bd49f;
 
-    background: #cdeabf;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
-
 
 .design-isosceles {
-    clip-path:
-        polygon(
-            50% 0%,
-            100% 100%,
-            0% 100%
-        );
+    width: 120px;
+    height: 90px;
 
-    border: none;
+    background: #a8dcae;
 
-    background: #d8edbd;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.design-rectangle {
+    width: 150px;
+    height: 100px;
+
+    background: #91cc98;
+
+    border-radius: 5px;
 }
 
 
-/* =====================================================
-   18. DESIGN FEEDBACK
-===================================================== */
+/* =========================================================
+   15. DESIGN INSTRUCTIONS
+   ========================================================= */
 
-.design-feedback {
-    max-width: 700px;
+.design-instruction {
+    background: #fff8df;
 
-    min-height: 50px;
+    border-left: 5px solid #e8c55d;
 
-    margin: 15px auto;
+    padding: 15px;
 
-    padding: 10px;
+    border-radius: 10px;
 
-    font-weight: bold;
+    margin-bottom: 20px;
+
+    color: #756437;
 
     line-height: 1.5;
 }
 
 
-/* =====================================================
-   19. FINAL CHALLENGE
-===================================================== */
+/* =========================================================
+   16. FENCE DESIGN RESULT
+   ========================================================= */
 
-.final-card {
-    max-width: 750px;
+.design-result {
+    margin-top: 20px;
 
-    margin: 20px auto;
+    padding: 18px;
 
-    padding: 35px;
-
-    background: #ffffff;
-
-    border-radius: 30px;
-
-    box-shadow:
-        0 10px 30px rgba(60, 100, 65, 0.12);
-}
-
-
-.final-card h1 {
-    color: #47764f;
-
-    margin-bottom: 10px;
-}
-
-
-.quiz-question {
-    margin-top: 25px;
-}
-
-
-.quiz-question h3 {
-    margin-bottom: 20px;
-
-    color: #55745a;
-}
-
-
-.quiz-option {
-    display: block;
-
-    width: 100%;
-
-    padding: 15px;
-
-    margin: 12px 0;
-
-    border: 2px solid #cfe4ca;
+    background: #eef8ef;
 
     border-radius: 15px;
 
-    background: #f8fff6;
+    text-align: center;
 
-    color: #4e6952;
+    color: #426c4b;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   17. QUIZ
+   ========================================================= */
+
+.quiz-card {
+    width: min(750px, 95%);
+
+    margin: 0 auto;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 8px 25px rgba(60, 100, 65, 0.1);
+
+    border: 2px solid #e0f0e1;
+}
+
+.quiz-question {
+    font-size: 21px;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+    color: #365c3d;
+
+    margin-bottom: 25px;
+}
+
+.quiz-options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.quiz-option {
+    border: 2px solid #d6e9d7;
+
+    background: #f8fcf8;
+
+    padding: 14px 18px;
+
+    border-radius: 15px;
 
     cursor: pointer;
 
-    font-size: 1rem;
-
     text-align: left;
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
+    color: #496d50;
 
+    font-size: 16px;
+
+    transition: 0.2s;
+}
 
 .quiz-option:hover {
-    background: #eaf7e5;
+    background: #eaf7eb;
 
-    transform: translateX(3px);
+    border-color: #a9d5ad;
+}
+
+.quiz-option.correct {
+    background: #e5f7e7;
+
+    border-color: #70b779;
+}
+
+.quiz-option.wrong {
+    background: #fff1dc;
+
+    border-color: #e3bd70;
 }
 
 
-.quiz-feedback {
-    min-height: 45px;
-
-    margin-top: 15px;
-
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   20. COMPLETION
-===================================================== */
+/* =========================================================
+   18. COMPLETION SCREEN
+   ========================================================= */
 
 .completion-card {
-    max-width: 750px;
+    width: min(750px, 95%);
 
-    margin: 30px auto;
+    margin: 50px auto;
 
-    padding: 40px 25px;
+    background: white;
 
-    background: #ffffff;
+    border-radius: 30px;
 
-    border-radius: 35px;
+    padding: 45px 30px;
 
-    box-shadow:
-        0 15px 35px rgba(60, 100, 65, 0.15);
+    text-align: center;
+
+    box-shadow: 0 12px 35px rgba(60, 100, 65, 0.12);
+
+    border: 2px solid #e0f0e1;
 }
 
+.trophy {
+    font-size: 70px;
 
-.completion-card h1 {
-    color: #47784e;
-
-    margin: 15px 0;
+    animation: trophyBounce 1.5s infinite ease-in-out;
 }
 
-
-.celebration {
-    font-size: 2.3rem;
-
-    letter-spacing: 8px;
-
-    animation:
-        celebrationFloat 2s ease-in-out infinite;
-}
-
-
-@keyframes celebrationFloat {
-
+@keyframes trophyBounce {
     0%,
     100% {
-        transform: scale(1);
+        transform: translateY(0);
     }
 
     50% {
-        transform: scale(1.08);
+        transform: translateY(-10px);
+    }
+}
+
+.completion-card h1 {
+    color: #39734a;
+
+    margin: 15px 0;
+
+    font-size: 35px;
+}
+
+.completion-card p {
+    color: #6f876f;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   19. CELEBRATION
+   ========================================================= */
+
+.celebration {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 2000;
+}
+
+.sparkle {
+    position: absolute;
+
+    animation: sparkleAnimation 1.2s ease-out forwards;
+}
+
+@keyframes sparkleAnimation {
+    0% {
+        opacity: 0;
+
+        transform: scale(0.2) translateY(0);
     }
 
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform: scale(1.3) translateY(-100px);
+    }
 }
 
 
-.certificate {
-    margin: 25px auto;
+/* =========================================================
+   20. FLOWER / GARDEN DECORATIONS
+   ========================================================= */
 
-    padding: 25px;
+.garden-decoration {
+    position: absolute;
 
-    max-width: 550px;
+    pointer-events: none;
 
-    background: #fff9dc;
+    user-select: none;
+}
 
-    border: 4px double #dfb64b;
+.flower-decoration {
+    font-size: 28px;
 
-    border-radius: 20px;
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
 }
 
 
-.certificate h2 {
-    color: #80672d;
+/* =========================================================
+   21. RESPONSIVE — TABLET / iPAD
+   ========================================================= */
 
-    margin-bottom: 10px;
-}
+@media (max-width: 900px) {
 
+    .sidebar {
+        width: 210px;
+    }
 
-.certificate p {
-    line-height: 1.6;
+    .main-content {
+        margin-left: 210px;
+    }
 
-    margin: 8px 0;
-}
+    .design-layout {
+        grid-template-columns: 1fr;
+    }
 
+    .shape-toolbox {
+        display: grid;
 
-/* =====================================================
-   21. MOBILE RESPONSIVE DESIGN
-===================================================== */
-
-@media (max-width: 750px) {
-
-    .top-bar {
-        padding: 10px 15px;
-
-        flex-wrap: wrap;
+        grid-template-columns: repeat(3, 1fr);
 
         gap: 8px;
     }
 
-
-    .logo {
-        font-size: 1rem;
+    .shape-toolbox h3 {
+        grid-column: 1 / -1;
     }
 
-
-    .student-name {
-        font-size: 0.75rem;
+    .shape-option {
+        margin-bottom: 0;
     }
-
-
-    .screen {
-        padding: 30px 15px;
-    }
-
-
-    .lesson-card {
-        grid-template-columns: 1fr;
-
-        padding: 20px;
-    }
-
-
-    .lesson-text {
-        text-align: center;
-    }
-
-
-    .designer-area {
-        grid-template-columns: 1fr;
-    }
-
-
-    .shape-selection {
-        order: 1;
-    }
-
-
-    .my-garden {
-        order: 2;
-    }
-
-
-    .welcome-content h1 {
-        font-size: 2.5rem;
-    }
-
-
-    .garden-svg {
-        width: 100%;
-    }
-
-
-    .calculation-card {
-        padding: 22px;
-    }
-
 }
 
 
-/* =====================================================
-   22. SMALL PHONE
-===================================================== */
+/* =========================================================
+   22. RESPONSIVE — MOBILE
+   ========================================================= */
 
-@media (max-width: 450px) {
+@media (max-width: 650px) {
 
     .top-bar {
-        justify-content: center;
+        height: 62px;
 
-        text-align: center;
+        padding: 0 12px;
     }
 
-
-    .logo {
-        width: 100%;
+    .game-logo {
+        font-size: 16px;
     }
 
-
-    .student-name {
-        width: 80%;
+    .creator-name {
+        display: none;
     }
-
 
     .sound-button {
         width: 40px;
         height: 40px;
     }
 
+    .sidebar {
+        top: 62px;
 
-    .welcome-content h1 {
-        font-size: 2rem;
+        width: 220px;
+
+        height: calc(100vh - 62px);
+
+        transform: translateX(-100%);
     }
 
-
-    .magic-flowers {
-        font-size: 1.5rem;
-
-        letter-spacing: 3px;
+    .sidebar.open {
+        transform: translateX(0);
     }
 
+    .main-content {
+        margin-left: 0;
 
-    .main-button {
-        width: 100%;
+        padding-top: 62px;
     }
 
-
-    .shape-button {
-        font-size: 0.9rem;
+    .screen {
+        padding: 25px 15px;
     }
 
+    .garden-svg-wrapper {
+        min-height: 320px;
 
-    .calculation-expression {
-        font-size: 1rem;
+        padding: 10px;
     }
 
+    .fence-container,
+    .design-container,
+    .lesson-card,
+    .calculation-card,
+    .quiz-card {
+        padding: 18px;
+    }
+
+    .shape-toolbox {
+        grid-template-columns: 1fr;
+    }
+
+    .shape-toolbox h3 {
+        grid-column: auto;
+    }
+
+    .design-canvas {
+        min-height: 350px;
+    }
+}
+
+
+/* =========================================================
+   23. ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =========================================================
+   24. TOUCH DEVICE IMPROVEMENT
+   ========================================================= */
+
+@media (pointer: coarse) {
+
+    .clickable-side {
+        stroke-width: 18px !important;
+    }
+
+    .sidebar-button,
+    .primary-button,
+    .secondary-button,
+    .shape-option,
+    .quiz-option {
+        min-height: 48px;
+    }
 }
